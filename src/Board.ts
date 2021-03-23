@@ -29,6 +29,10 @@ export class Board
         return tile;
     }
 
+    public SymbolAt(coorindates: Coordinates): string {
+        return this.TileAt(coorindates).Symbol;
+    }
+
     public AddTileAt(symbol: string, coordinates: Coordinates) : void {
         const tile = this.TileAt(coordinates);
 

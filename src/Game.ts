@@ -20,7 +20,7 @@ export class Game {
     }
 
     private checkNextMoveIsOnEmptyTile (coordinates: Coordinates) {
-        if (this._board.TileAt(coordinates).Symbol != this.EMPTY_TILE) {
+        if (this._board.SymbolAt(coordinates) != this.EMPTY_TILE) {
             throw new Error("Invalid position");
         }
     }
@@ -43,40 +43,42 @@ export class Game {
 
     public Winner() : string {
         //if the positions in first row are taken
-        if (this._board.TileAt({x: 0, y: 0})!.Symbol != this.EMPTY_TILE &&
-                this._board.TileAt({x: 0, y: 1})!.Symbol != this.EMPTY_TILE &&
-                this._board.TileAt({x: 0, y: 2})!.Symbol != this.EMPTY_TILE) {
+        if (this._board.SymbolAt({x: 0, y: 0}) != this.EMPTY_TILE &&
+                this._board.SymbolAt({x: 0, y: 1}) != this.EMPTY_TILE &&
+                this._board.SymbolAt({x: 0, y: 2}) != this.EMPTY_TILE) {
             //if first row is full with same symbol
-            if (this._board.TileAt({x: 0, y: 0})!.Symbol ==
-                    this._board.TileAt({x: 0, y: 1})!.Symbol &&
-                    this._board.TileAt({x: 0, y: 2})!.Symbol == this._board.TileAt({x: 0, y: 1})!.Symbol) {
-                return this._board.TileAt({x: 0, y: 0})!.Symbol;
+            if (this._board.SymbolAt({x: 0, y: 0}) ==
+                    this._board.SymbolAt({x: 0, y: 1}) &&
+                    this._board.SymbolAt({x: 0, y: 2}) ==
+                    this._board.SymbolAt({x: 0, y: 1})
+            ) {
+                return this._board.SymbolAt({x: 0, y: 0});
             }
         }
 
         //if the positions in first row are taken
-        if (this._board.TileAt({x: 1, y: 0})!.Symbol != this.EMPTY_TILE &&
-                this._board.TileAt({x: 1, y: 1})!.Symbol != this.EMPTY_TILE &&
-                this._board.TileAt({x: 1, y: 2})!.Symbol != this.EMPTY_TILE) {
+        if (this._board.SymbolAt({x: 1, y: 0}) != this.EMPTY_TILE &&
+                this._board.SymbolAt({x: 1, y: 1}) != this.EMPTY_TILE &&
+                this._board.SymbolAt({x: 1, y: 2}) != this.EMPTY_TILE) {
             //if middle row is full with same symbol
-            if (this._board.TileAt({x: 1, y: 0})!.Symbol ==
-                    this._board.TileAt({x: 1, y: 1})!.Symbol &&
-                    this._board.TileAt({x: 1, y: 2})!.Symbol ==
-                            this._board.TileAt({x: 1, y: 1})!.Symbol) {
-                return this._board.TileAt({x: 1, y: 0})!.Symbol;
+            if (this._board.SymbolAt({x: 1, y: 0}) ==
+                    this._board.SymbolAt({x: 1, y: 1}) &&
+                    this._board.SymbolAt({x: 1, y: 2}) ==
+                            this._board.SymbolAt({x: 1, y: 1})) {
+                return this._board.SymbolAt({x: 1, y: 0});
             }
         }
 
         //if the positions in first row are taken
-        if (this._board.TileAt({x: 2, y: 0})!.Symbol != this.EMPTY_TILE &&
-                this._board.TileAt({x: 2, y: 1})!.Symbol != this.EMPTY_TILE &&
-                this._board.TileAt({x: 2, y: 2})!.Symbol != this.EMPTY_TILE) {
+        if (this._board.SymbolAt({x: 2, y: 0}) != this.EMPTY_TILE &&
+                this._board.SymbolAt({x: 2, y: 1}) != this.EMPTY_TILE &&
+                this._board.SymbolAt({x: 2, y: 2}) != this.EMPTY_TILE) {
             //if middle row is full with same symbol
-            if (this._board.TileAt({x: 2, y: 0})!.Symbol ==
-                    this._board.TileAt({x: 2, y: 1})!.Symbol &&
-                    this._board.TileAt({x: 2, y: 2})!.Symbol ==
-                            this._board.TileAt({x: 2, y: 1})!.Symbol) {
-                return this._board.TileAt({x: 2, y: 0})!.Symbol;
+            if (this._board.SymbolAt({x: 2, y: 0}) ==
+                    this._board.SymbolAt({x: 2, y: 1}) &&
+                    this._board.SymbolAt({x: 2, y: 2}) ==
+                            this._board.SymbolAt({x: 2, y: 1})) {
+                return this._board.SymbolAt({x: 2, y: 0});
             }
         }
 
