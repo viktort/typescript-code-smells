@@ -120,8 +120,6 @@ class Board
 
     public AddTileAt(symbol: string, coordinates: Coordinates) : void
     {
-        const tile : Tile = {X :coordinates.x, Y:coordinates.y, Symbol:symbol};
-
         this._plays.find((t:Tile) => t.X == coordinates.x && t.Y == coordinates.y)!.Symbol = symbol;
     }
 }
