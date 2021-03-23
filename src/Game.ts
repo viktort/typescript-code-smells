@@ -100,26 +100,34 @@ interface Tile
 
 class Board
 {
-    private _plays : Tile[] = [];
+    private _tiles : Tile[] = [];
 
     constructor()
     {
-        for (let i = 0; i < 3; i++)
-        {
-            for (let j = 0; j < 3; j++)
-            {
-                const tile : Tile = { X: i, Y: j, Symbol: Symbol.EMPTY };
-                this._plays.push(tile);
-            }
-        }
+        this._tiles = [
+            { X: 0, Y: 0, Symbol: Symbol.EMPTY },
+            { X: 1, Y: 0, Symbol: Symbol.EMPTY },
+            { X: 2, Y: 0, Symbol: Symbol.EMPTY },
+            { X: 0, Y: 1, Symbol: Symbol.EMPTY },
+            { X: 1, Y: 1, Symbol: Symbol.EMPTY },
+            { X: 2, Y: 1, Symbol: Symbol.EMPTY },
+            { X: 0, Y: 2, Symbol: Symbol.EMPTY },
+            { X: 1, Y: 2, Symbol: Symbol.EMPTY },
+            { X: 2, Y: 2, Symbol: Symbol.EMPTY },
+        ];
     }
 
     public TileAt(coordinates: Coordinates): Tile {
-        return this._plays.find((t:Tile) => t.X == coordinates.x && t.Y == coordinates.y)!
+        const tile = this._tiles.find((t:Tile) => t.X == coordinates.x && t.Y == coordinates.y);
+        if (!tile) {
+            throw new Error(`Tile not found at X: ${coordinates.x} Y: ${coordinates.y}`);
+        }
+        return tile;
     }
 
-    public AddTileAt(symbol: string, coordinates: Coordinates) : void
-    {
-        this._plays.find((t:Tile) => t.X == coordinates.x && t.Y == coordinates.y)!.Symbol = symbol;
+    public AddTileAt(symbol: string, coordinates: Coordinates) : void {
+        const tile = this.TileAt(coordinates);
+
+        tile.Symbol = symbol;
     }
 }
