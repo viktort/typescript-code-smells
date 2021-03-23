@@ -41,45 +41,32 @@ export class Game {
         this.updateState(symbol, coordinates);
     }
 
+    private WinnerInRow(rowIndex: number) : boolean {
+        if (this._board.SymbolAt({x: rowIndex, y: 0}) != this.EMPTY_TILE &&
+            this._board.SymbolAt({x: rowIndex, y: 1}) != this.EMPTY_TILE &&
+            this._board.SymbolAt({x: rowIndex, y: 2}) != this.EMPTY_TILE) {
+            //if first row is full with same symbol
+            if (this._board.SymbolAt({x: rowIndex, y: 0}) ==
+                this._board.SymbolAt({x: rowIndex, y: 1}) &&
+                this._board.SymbolAt({x: rowIndex, y: 2}) ==
+                this._board.SymbolAt({x: rowIndex, y: 1})
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Winner() : string {
         //if the positions in first row are taken
-        if (this._board.SymbolAt({x: 0, y: 0}) != this.EMPTY_TILE &&
-                this._board.SymbolAt({x: 0, y: 1}) != this.EMPTY_TILE &&
-                this._board.SymbolAt({x: 0, y: 2}) != this.EMPTY_TILE) {
-            //if first row is full with same symbol
-            if (this._board.SymbolAt({x: 0, y: 0}) ==
-                    this._board.SymbolAt({x: 0, y: 1}) &&
-                    this._board.SymbolAt({x: 0, y: 2}) ==
-                    this._board.SymbolAt({x: 0, y: 1})
-            ) {
-                return this._board.SymbolAt({x: 0, y: 0});
-            }
+        if (this.WinnerInRow(0)) {
+            return this._board.SymbolAt({x: 0, y: 0});
         }
-
-        //if the positions in first row are taken
-        if (this._board.SymbolAt({x: 1, y: 0}) != this.EMPTY_TILE &&
-                this._board.SymbolAt({x: 1, y: 1}) != this.EMPTY_TILE &&
-                this._board.SymbolAt({x: 1, y: 2}) != this.EMPTY_TILE) {
-            //if middle row is full with same symbol
-            if (this._board.SymbolAt({x: 1, y: 0}) ==
-                    this._board.SymbolAt({x: 1, y: 1}) &&
-                    this._board.SymbolAt({x: 1, y: 2}) ==
-                            this._board.SymbolAt({x: 1, y: 1})) {
-                return this._board.SymbolAt({x: 1, y: 0});
-            }
+        if (this.WinnerInRow(1)) {
+            return this._board.SymbolAt({x: 1, y: 0});
         }
-
-        //if the positions in first row are taken
-        if (this._board.SymbolAt({x: 2, y: 0}) != this.EMPTY_TILE &&
-                this._board.SymbolAt({x: 2, y: 1}) != this.EMPTY_TILE &&
-                this._board.SymbolAt({x: 2, y: 2}) != this.EMPTY_TILE) {
-            //if middle row is full with same symbol
-            if (this._board.SymbolAt({x: 2, y: 0}) ==
-                    this._board.SymbolAt({x: 2, y: 1}) &&
-                    this._board.SymbolAt({x: 2, y: 2}) ==
-                            this._board.SymbolAt({x: 2, y: 1})) {
-                return this._board.SymbolAt({x: 2, y: 0});
-            }
+        if (this.WinnerInRow(2)) {
+            return this._board.SymbolAt({x: 2, y: 0});
         }
 
         return this.EMPTY_TILE;
