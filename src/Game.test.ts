@@ -102,4 +102,28 @@ describe('TicTacToe game', () => {
         
         expect(winner).toBe("O");
     });
+
+    it('should declare player X as winner if it plays three in first column', () =>{
+        game.Play('X', {x: 0, y: 0});
+        game.Play('O', {x: 1, y: 2});
+        game.Play('X', {x: 1, y: 0});
+        game.Play('O', {x: 1, y: 1});
+        game.Play('X', {x: 2, y: 0});
+
+        var winner = game.Winner();
+
+        expect(winner).toBe("X");
+    });
+
+    it('should declare player X as winner if it plays three in second column', () =>{
+        game.Play('X', {x: 0, y: 1});
+        game.Play('O', {x: 1, y: 2});
+        game.Play('X', {x: 1, y: 1});
+        game.Play('O', {x: 2, y: 2});
+        game.Play('X', {x: 2, y: 1});
+
+        var winner = game.Winner();
+
+        expect(winner).toBe("X");
+    });
 });
