@@ -2,26 +2,38 @@ export class Game {
     private _lastSymbol: string = ' ';
     private _board: Board = new Board();
 
-    public Play(symbol: string, x: number, y: number) : void {
-        //if first move
-        if (this._lastSymbol == ' ') {
-            //if player is X
-            if (symbol == 'O') {
-                throw new Error("Invalid first player");
-            }
+    private checkFirstMoveIsLegal (symbol: string) {
+        if (this._lastSymbol == ' ' && symbol == 'O') {
+            throw new Error("Invalid first player");
         }
-        //if not first move but player repeated
-        else if (symbol == this._lastSymbol) {
+    }
+
+    private checkCorrectPlayerSequence (symbol: string ) {
+        if (symbol == this._lastSymbol) {
             throw new Error("Invalid next player");
         }
-        //if not first move but play on an already played tile
-        else if (this._board.TileAt(x, y).Symbol != ' ') {
+    }
+
+    private checkNextMoveIsOnEmptyTile (x: number, y: number) {
+        if (this._board.TileAt(x, y).Symbol != ' ') {
             throw new Error("Invalid position");
         }
+    }
 
-        // update game state
+    private validateInput (symbol: string, x: number, y: number) {
+        this.checkFirstMoveIsLegal(symbol);
+        this.checkCorrectPlayerSequence(symbol);
+        this.checkNextMoveIsOnEmptyTile(x, y);
+    }
+
+    private updateState (symbol: string, x: number, y: number) {
         this._lastSymbol = symbol;
         this._board.AddTileAt(symbol, x, y);
+    }
+
+    public Play(symbol: string, x: number, y: number) : void {
+        this.validateInput(symbol, x, y);
+        this.updateState(symbol, x, y);
     }
 
     public Winner() : string {
